@@ -5,7 +5,7 @@ import string
 def description():
     print("""         Witaj w programie. Odpowiednie hasło to niezwykle ważna rzecz podczas korzystania 
          z internetu. Powinno być trudne lub wręcz nawet niemożliwe do złamania. 
-         Niestety wiele osób obawiając się, że je zapomną stosują najgorsze możliwe
+         Niestety wiele osób obawiając się, że je zapomni stosują najgorsze możliwe
          typy haseł: daty urodzenia i imiona lub ich kombinacje.
          Generator pozwoli Ci utworzyć odpowiednio mocne hasło korzystając z Twoich
          propozycji i sugestii co ma się w nim znaleźć """)
