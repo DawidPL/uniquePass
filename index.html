@@ -58,10 +58,25 @@ function getPassword(){
         pass += chars.charAt(i);
     }
     return pass;
+  }else if (document.getElementById("letter_and_numbers").checked == true){
+    var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP1234567890";
+    var pass = "";
+    for (var x = 0; x < 10; x++) {
+        var i = Math.floor(Math.random() * chars.length);
+        pass += chars.charAt(i);
   }
-    else {
-      alert("błąd!");
-    }
+  return pass;
+}
+  else if (document.getElementById("only_letter").checked == true) {
+    var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP";
+    var pass = "";
+    for (var x = 0; x < 10; x++) {
+        var i = Math.floor(Math.random() * chars.length);
+        pass += chars.charAt(i);
+  }
+  return pass;
+}
+
 }
 </script>
 <script>
