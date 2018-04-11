@@ -1,0 +1,40 @@
+body{
+  margin:0 auto;
+
+}
+.menu{
+  margin:0 auto;
+  text-align: center;
+}
+.container{
+  margin:0 auto;
+  width: 80%;
+  border: 1px solid #d2d2d2;
+}
+.main_wrapper{
+  display:grid;
+  grid-template-columns: auto;
+  border:1px solid black;
+}
+.grid1{
+  text-align:center;
+}
+.line{
+  border-bottom:1px solid #d2d2d2;
+}
+#auto_pass_generate{
+  border: 1px solid #d2d2d2;
+  padding:10px 20px;
+  text-align:center;
+  line-height: normal;
+}
+#tohide:hover{
+  display:none;
+}
+/*menu*/
+ .fixed_menu ul li{
+   display: inline;
+   text-decoration-style: none;
+   padding: 10px 10px 2px 10px;
+   border-bottom:1px solid #d2d2d2;
+ }

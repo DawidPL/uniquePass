@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script src="math.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<body>
+  <div class="menu">
+    <nav class="fixed_menu" >
+      <ul>
+        <li>Strona główna</li>
+        <li>Portfolio</li>
+        <li>Contact</li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container">
+    <div class="main_wrapper">
+      <div class="grid1">
+        <form>
+          <input type="text" id="auto_pass_generate" value="wygeneruj hasło">
+          <input type="button" id="auto_pass_generate_button" onclick="autoGeneratePass()" value="generuj">
+          <input type="button" id="copy_to_clipboard" onclick="copyToClipboard()" value="skopiuj do schowka">
+        </form>
+        <div onmouseover="mOver(this)" onmouseout="mOut(this)" style="background-color:#d2d2d2; width:100px; height:50px;"></div>
+        text
+      </div>
+      <div class="grid2">
+        <form>
+          <label><input type="checkbox" id="only_letter" onclick="">tylko litery</label>
+          <label><input type="checkbox" id="letter_and_numbers">litery i cyfry</label>
+          <label><input type="checkbox" id="all_symbols">wszystkie znaki</label>
+        </form>
+      </div>
+      <div class="grid2">
+        text
+      </div>
+      <div class="grid2">
+        <div>
+          <div class="line"></div>
+        </div>
+      </div>
+      <div class="grid2">
+        text
+      </div>
+    </div>
+  </div>
+<script>
+function getPassword(){
+  if (document.getElementById("all_symbols").checked == true){
+    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+    var pass = "";
+    for (var x = 0; x < 10; x++) {
+        var i = Math.floor(Math.random() * chars.length);
+        pass += chars.charAt(i);
+    }
+    return pass;
+  }
+    else {
+      alert("błąd!");
+    }
+}
+</script>
+<script>
+function autoGeneratePass(){
+  document.getElementById("auto_pass_generate").value = getPassword();
+}
+</script>
+<script>
+function copyToClipboard(){
+  var copyText = document.getElementById("auto_pass_generate");
+  copyText.select();
+  document.execCommand("Copy");
+  alert("kopia");
+}
+</script>
+<!--
+<script>
+  function mOver(obj){
+    obj.innerHTML = autoGeneratePass()
+  }
+  function mOut(obj){
+    obj.innerHTML = " "
+  }
+</script>
+<script>
+  ('#auto_pass_generate').hover(
+  function () {
+    $(this).show();
+  },
+  function () {
+    $(this).hide();
+  }
+);
+</script>
+-->
+
+
+</body>
