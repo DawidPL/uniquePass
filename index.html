@@ -8,6 +8,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
+<body onload = "userPassword();">
   <div class="menu">
     <nav class="fixed_menu" >
       <ul>
@@ -34,6 +35,11 @@
           <label><input type="checkbox" id="letter_and_numbers">litery i cyfry</label>
           <label><input type="checkbox" id="all_symbols">wszystkie znaki</label>
         </form>
+        <form>
+         <label><input type="text" id="user_value"></label>
+         <input type="button" id="user_value_button" onclick="userPassword()" value="zatwierdź">
+        </form>
+        <p>podaj własne słowo/litery/znaki które mają znaleźć się w haśle</p>
       </div>
       <div class="grid2">
         text
