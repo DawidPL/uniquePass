@@ -4,11 +4,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css" type="text/css" />
 <script src="math.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!--auto refresh jquery
+<script>
+$(document).ready(function() {
+    $("#refresh_pass_generate").load(autoPassword(););
+    var refreshId = setInterval(function() {
+        $("#refresh_pass_generate").load(autoPassword(););
+    }, 2000);
+});
+</script>
+-->
 </head>
 <body>
-<body onload = "userPassword();">
   <div class="menu">
     <nav class="fixed_menu" >
       <ul>
@@ -22,12 +30,18 @@
     <div class="main_wrapper">
       <div class="grid1">
         <form>
+          <input type="text" id="refresh_pass_generate" onmouseover="autoPassword(); copyToClipboardButton();">
+        </form>
+        <div id="copyAlert">Najedź na okno</div>
+        <form>
           <input type="text" id="auto_pass_generate" value="wygeneruj hasło">
+        </form>
+        <form>
           <input type="button" id="auto_pass_generate_button" onclick="autoGeneratePass()" value="generuj">
           <input type="button" id="copy_to_clipboard" onclick="copyToClipboard()" value="skopiuj do schowka">
         </form>
         <div onmouseover="mOver(this)" onmouseout="mOut(this)" style="background-color:#d2d2d2; width:100px; height:50px;"></div>
-        text
+        Dodatkowe opcje
       </div>
       <div class="grid2">
         <form>
@@ -36,13 +50,12 @@
           <label><input type="checkbox" id="all_symbols">wszystkie znaki</label>
         </form>
         <form>
-         <label><input type="text" id="user_value"></label>
-         <input type="button" id="user_value_button" onclick="userPassword()" value="zatwierdź">
+          <label><input type="text" id="user_value"></label>
+          <input type="button" id="user_value_button" onclick="userPassword()" value="zatwierdź">
         </form>
         <p>podaj własne słowo/litery/znaki które mają znaleźć się w haśle</p>
       </div>
       <div class="grid2">
-        text
       </div>
       <div class="grid2">
         <div>
@@ -50,10 +63,25 @@
         </div>
       </div>
       <div class="grid2">
-        text
+        Dodatkowe opcje
       </div>
     </div>
   </div>
+<script>
+function autoPassword(){
+    document.getElementById("refresh_pass_generate").value = getPassword();
+}
+</script>
+<script>
+function userPassword(){
+  var data = document.getElementById("user_value");
+  document.getElementById("user_value_button").disabled = false;
+  while (data == null){
+  document.getElementById("user_value_button").disabled = true;
+  }
+  return data;
+}
+</script>
 <script>
 function getPassword(){
   if (document.getElementById("all_symbols").checked == true){
@@ -82,7 +110,15 @@ function getPassword(){
   }
   return pass;
 }
-
+  else{
+    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+    var pass = "";
+    for (var x = 0; x < 10; x++) {
+        var i = Math.floor(Math.random() * chars.length);
+        pass += chars.charAt(i);
+    }
+    return pass;
+  }
 }
 </script>
 <script>
@@ -96,6 +132,15 @@ function copyToClipboard(){
   copyText.select();
   document.execCommand("Copy");
   alert("kopia");
+}
+</script>
+<script>
+function copyToClipboardButton(){
+  var copyText = document.getElementById("refresh_pass_generate");
+  copyText.select();
+  document.execCommand("Copy");
+  document.getElementById("copyAlert").innerHTML = "Hasło zostało wygenerowane."+
+  "Najedz ponownie aby utworzyć kolejne";
 }
 </script>
 <!--
