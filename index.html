@@ -31,6 +31,7 @@ $(document).ready(function() {
       <div class="grid1">
         <form>
           <input type="text" id="refresh_pass_generate" onmouseover="autoPassword(); copyToClipboardButton();">
+          <input type="checkbox" id="copy_to_clipboard" onclick="copyToClipboardButton()">
         </form>
         <div id="copyAlert">Najedź na okno</div>
         <form>
@@ -52,6 +53,8 @@ $(document).ready(function() {
         <form>
           <label><input type="text" id="user_value"></label>
           <input type="button" id="user_value_button" onclick="userPassword()" value="zatwierdź">
+          <label><input type="text" id="symbols_amount" value="ilość znaków"></label>
+          <input type="button" id="symbols_amount_button" onclick="" value = "zatwierdź">
         </form>
         <p>podaj własne słowo/litery/znaki które mają znaleźć się w haśle</p>
       </div>
@@ -141,6 +144,7 @@ function copyToClipboardButton(){
   document.execCommand("Copy");
   document.getElementById("copyAlert").innerHTML = "Hasło zostało wygenerowane."+
   "Najedz ponownie aby utworzyć kolejne";
+  document.getElementById("copy_to_clipboard").checked = true;
 }
 </script>
 <!--
