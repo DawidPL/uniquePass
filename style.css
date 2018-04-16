@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Slab|Poiret+One|Pontano+Sans');
+
 body{
   margin:0 auto;
+  font-family: 'Pontano Sans', sans-serif;
 
 }
 .menu{
@@ -9,12 +12,10 @@ body{
 .container{
   margin:0 auto;
   width: 80%;
-  border: 1px solid #d2d2d2;
 }
 .main_wrapper{
   display:grid;
   grid-template-columns: auto;
-  border:1px solid black;
 }
 .grid1{
   text-align:center;
@@ -38,3 +39,47 @@ body{
    padding: 10px 10px 2px 10px;
    border-bottom:1px solid #d2d2d2;
  }
+ #refresh_pass_generate{
+   position:relative;
+   width:300px;
+   height: 50px;
+   border:2px solid #5d98f7;
+   margin:20px 0 10px 0 ;
+   text-align:center;
+   font-size: 22px;
+   font-family:'Pontano Sans', sans-serif;
+ }
+ #refresh_pass_generate:hover{
+   background-color: #d6e5fc;
+ }
+ #copyAlert{
+   margin-top:40px;
+   font-size:22px;
+   font-family: 'Pontano Sans', sans-serif;
+   color: #525963;
+ }
+#copyButton{
+  position:absolute;
+  display:inline-block;
+  margin-left:9%;
+  margin-top:-1.2%;
+  padding-bottom:5px;
+  border:none;
+  box-shadow:none;
+  background-color: #fff;
+  font-size:22px;
+  font-family: 'Pontano Sans', sans-serif;
+  color: #4884db;
+
+}
+#copyButton:hover{
+  color:#bcd2f2;
+}
+h2{
+  margin-top:150px;
+  color: #525963;
+}
+.additional_option{
+  margin:10px 5px;
+  color:#525963;
+}
