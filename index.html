@@ -55,14 +55,16 @@ $(document).ready(function() {
             <label><input type="checkbox" id="all_symbols" onclick="checkBoxCheck()">wszystkie znaki</label>
           </div>
         </div>
-        <form>
-          <label><input type="text" id="user_value"></label>
-          <input type="button" id="user_value_button" onclick="userPassword()" value="zatwierdź">
-          <label><input type="text" id="symbols_amount" value="ilość znaków"></label>
-          <input type="button" id="symbols_amount_button" onclick="passwordLength();" value="zatwierdź">
-          <input type="text" id="auto_pass_generate" value="wygeneruj hasło">
-        </form>
-        <p>podaj własne słowo/litery/znaki które mają znaleźć się w haśle</p>
+        <div>
+          <p>podaj preferowaną długość hasła (przedział 6-50):</p>
+          <div>
+            <label><input type="text" id="symbols_amount" value="ilość znaków"></label>
+            <input type="button" id="symbols_amount_button" onclick="passwordLength();" value="zatwierdź">
+            <div style="float:right;">
+              <input type="text" id="auto_pass_generate" value="wygeneruj hasło">
+            </div>
+          </div>
+        </div>
       </div>
       <div class="grid2">
         <span>Liczba wygenerowanych haseł:</span><span id="how_many"></span>
@@ -175,6 +177,7 @@ $(document).ready(function() {
       document.execCommand("Copy");
       if (copyText.value % 1 === 0 && copyText.value <= 50 && copyText.value >= 6 && copyText.value !== 0) {
         document.getElementById("auto_pass_generate").value = getPassword(copyText.value);
+        document.getElementById("auto_pass_generate").style.display = "inline";
       } else if(copyText.value % 1 === 0 && copyText.value >= 50){
         alert("Hasło może mieć maksymalnie 50 znaków, podaj mniejszą liczbę.");
       } else if(copyText.value % 1 === 0 && copyText.value <= 6){
