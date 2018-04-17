@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <head>
-<meta charset="UTF-8" >
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css" type="text/css" />
-<script src="math.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<!--auto refresh jquery
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <script src="math.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!--auto refresh jquery
 <script>
 $(document).ready(function() {
     $("#refresh_pass_generate").load(autoPassword(););
@@ -16,9 +17,10 @@ $(document).ready(function() {
 </script>
 -->
 </head>
+
 <body>
   <div class="menu">
-    <nav class="fixed_menu" >
+    <nav class="fixed_menu">
       <ul>
         <li>Strona główna</li>
         <li>Portfolio</li>
@@ -32,16 +34,13 @@ $(document).ready(function() {
         <div>
           <div id="copyAlert">Najedź na okno</div>
           <div>
-          <input type="text" id="refresh_pass_generate" onmouseover="autoPassword(); copyToClipboardButton(); buttonAppear();">
-          <div style="display:inline-block;">
-          <input id="copyButton" type="button" onclick="copyToClipboardSecond(); copyToClipboardPopup();" style="display:none; float:right;"></input>
+            <input type="text" id="refresh_pass_generate" onmouseover="autoPassword(); copyToClipboardButton(); buttonAppear();">
+            <div style="display:inline-block;">
+              <input id="copyButton" type="button" onclick="copyToClipboardSecond(); copyToClipboardPopup();" style="display:none; float:right;"></input>
+            </div>
           </div>
-        </div>
           <!--<input type="checkbox" style="display:none; float:right;"id="copy_to_clipboard">-->
         </div>
-        <!--<form>
-          <input type="text" id="auto_pass_generate" value="wygeneruj hasło">
-        </form>-->
         <form>
           <!--<input type="button" id="auto_pass_generate_button" onclick="autoGeneratePass()" value="generuj">-->
           <input type="button" style="display:none;" id="copy_to_clipboard" onclick="copyToClipboard()" value="skopiuj do schowka">
@@ -50,19 +49,23 @@ $(document).ready(function() {
       <div class="grid2">
         <h2>Dodatkowe opcje</h2>
         <div class="additional_option">
-          <label><input type="checkbox" id="only_letter" onclick="checkBoxCheck()">tylko litery</label>
-          <label><input type="checkbox" id="letter_and_numbers" onclick="checkBoxCheck()">litery i cyfry</label>
-          <label><input type="checkbox" id="all_symbols" onclick="checkBoxCheck()">wszystkie znaki</label>
+          <div class="additional_option">
+            <label><input type="checkbox" id="only_letter" onclick="checkBoxCheck()">tylko litery</label>
+            <label><input type="checkbox" id="letter_and_numbers" onclick="checkBoxCheck()">litery i cyfry</label>
+            <label><input type="checkbox" id="all_symbols" onclick="checkBoxCheck()">wszystkie znaki</label>
+          </div>
         </div>
         <form>
           <label><input type="text" id="user_value"></label>
           <input type="button" id="user_value_button" onclick="userPassword()" value="zatwierdź">
-          <label><input type="text" id="symbols_amount" onclick="getWindowEmpty()" value="ilość znaków"></label>
-          <input type="button" id="symbols_amount_button" onclick="passwordLength()" value = "zatwierdź">
+          <label><input type="text" id="symbols_amount" value="ilość znaków"></label>
+          <input type="button" id="symbols_amount_button" onclick="passwordLength();" value="zatwierdź">
+          <input type="text" id="auto_pass_generate" value="wygeneruj hasło">
         </form>
         <p>podaj własne słowo/litery/znaki które mają znaleźć się w haśle</p>
       </div>
       <div class="grid2">
+        <span>Liczba wygenerowanych haseł:</span><span id="how_many"></span>
       </div>
       <div class="grid2">
         <div>
@@ -70,138 +73,134 @@ $(document).ready(function() {
         </div>
       </div>
       <div class="grid2">
-      2018
+        2018
       </div>
     </div>
   </div>
-<script>
-function autoPassword(){
-    document.getElementById("refresh_pass_generate").value = getPassword();
-}
-</script>
-<script>
-function userPassword(){
-  var data = document.getElementById("user_value");
-  document.getElementById("user_value_button").disabled = false;
-  while (data == null){
-  document.getElementById("user_value_button").disabled = true;
-  }
-  return data;
-}
-</script>
-<script>
-function getPassword(){
-  if (document.getElementById("all_symbols").checked == true){
-    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
-    var pass = "";
-    for (var x = 0; x < 15; x++) {
-        var i = Math.floor(Math.random() * chars.length);
-        pass += chars.charAt(i);
+  <script>
+    function autoPassword() {
+      document.getElementById("refresh_pass_generate").value = getPassword(15);
     }
-    return pass;
-  }else if (document.getElementById("letter_and_numbers").checked == true){
-    var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP1234567890";
-    var pass = "";
-    for (var x = 0; x < 15; x++) {
-        var i = Math.floor(Math.random() * chars.length);
-        pass += chars.charAt(i);
-  }
-  return pass;
-}
-  else if (document.getElementById("only_letter").checked == true) {
-    var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP";
-    var pass = "";
-    for (var x = 0; x < 15; x++) {
-        var i = Math.floor(Math.random() * chars.length);
-        pass += chars.charAt(i);
-  }
-  return pass;
-}
-  else{
-    var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
-    var pass = "";
-    for (var x = 0; x < 15; x++) {
-        var i = Math.floor(Math.random() * chars.length);
-        pass += chars.charAt(i);
+  </script>
+  <script>
+    function userPassword() {
+      var data = document.getElementById("user_value");
+      document.getElementById("user_value_button").disabled = false;
+      while (data == null) {
+        document.getElementById("user_value_button").disabled = true;
+      }
+      return data;
     }
-    return pass;
-  }
-}
-</script>
-<script>
-function autoGeneratePass(){
-  document.getElementById("auto_pass_generate").value = getPassword();
-}
-</script>
-<script>
-function copyToClipboard(){
-  var copyText = document.getElementById("auto_pass_generate");
-  copyText.select();
-  document.execCommand("Copy");
-  alert("skopiowano");
-}
-</script>
-<script>
-function buttonAppear(){
-  document.getElementById("copyButton").style.display = "block";
-  document.getElementById("copyButton").value = "skopiuj do schowka";
-}
-</script>
-<script>
-function copyToClipboardSecond(){
-  var copyText = document.getElementById("refresh_pass_generate");
-  copyText.select();
-  document.execCommand("Copy");
+  </script>
+  <script>
+    function getPassword(length) {
+      if (document.getElementById("all_symbols").checked == true) {
+        var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+        var pass = "";
+        for (var x = 0; x < length; x++) {
+          var i = Math.floor(Math.random() * chars.length);
+          pass += chars.charAt(i);
+        }
+        return pass;
+      } else if (document.getElementById("letter_and_numbers").checked == true) {
+        var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP1234567890";
+        var pass = "";
+        for (var x = 0; x < length; x++) {
+          var i = Math.floor(Math.random() * chars.length);
+          pass += chars.charAt(i);
+        }
+        return pass;
+      } else if (document.getElementById("only_letter").checked == true) {
+        var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP";
+        var pass = "";
+        for (var x = 0; x < length; x++) {
+          var i = Math.floor(Math.random() * chars.length);
+          pass += chars.charAt(i);
+        }
+        return pass;
+      } else {
+        var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+        var pass = "";
+        for (var x = 0; x < length; x++) {
+          var i = Math.floor(Math.random() * chars.length);
+          pass += chars.charAt(i);
+        }
+        return pass;
+      }
+    }
+  </script>
+  <script>
+    function autoGeneratePass() {
+      document.getElementById("auto_pass_generate").value = getPassword();
+    }
+  </script>
+  <script>
+    function copyToClipboard() {
+      var copyText = document.getElementById("auto_pass_generate");
+      copyText.select();
+      document.execCommand("Copy");
+      alert("skopiowano");
+    }
+  </script>
+  <script>
+    function buttonAppear() {
+      document.getElementById("copyButton").style.display = "block";
+      document.getElementById("copyButton").value = "skopiuj do schowka";
+    }
+  </script>
+  <script>
+    function copyToClipboardSecond() {
+      var copyText = document.getElementById("refresh_pass_generate");
+      copyText.select();
+      document.execCommand("Copy");
 
-}
-</script>
-<script>
-function copyToClipboardPopup(){
-  document.getElementById("copyButton").value = "skopiowano";
-}
-</script>
-<script>
-function copyToClipboardButton(){
-  var copyText = document.getElementById("refresh_pass_generate");
-  copyText.select();
-  document.execCommand("Copy");
-  document.getElementById("copyAlert").innerHTML = "Hasło zostało wygenerowane. "+
-  "Najedź ponownie aby utworzyć kolejne lub ";
-  document.getElementById("copy_to_clipboard").checked = true;
-}
-</script>
-<script>
-function  passwordLength(){
+    }
+  </script>
+  <script>
+    function copyToClipboardPopup() {
+      document.getElementById("copyButton").value = "skopiowano";
+    }
+  </script>
+  <script>
+    function copyToClipboardButton() {
+      document.getElementById("copyAlert").innerHTML = "Hasło zostało wygenerowane. " +
+        "Najedź ponownie aby utworzyć kolejne lub ";
+      document.getElementById("copy_to_clipboard").checked = true;
+    }
+  </script>
+  <script>
+    function passwordLength() {
+      var copyText = document.getElementById("symbols_amount");
+      copyText.select();
+      document.execCommand("Copy");
+      if (copyText.value % 1 === 0 && copyText.value <= 50 && copyText.value >= 6 && copyText.value !== 0) {
+        document.getElementById("auto_pass_generate").value = getPassword(copyText.value);
+      } else if(copyText.value % 1 === 0 && copyText.value >= 50){
+        alert("Hasło może mieć maksymalnie 50 znaków, podaj mniejszą liczbę.");
+      } else if(copyText.value % 1 === 0 && copyText.value <= 6){
+        alert("Hasło jest za krótkie, podaj większą ilość znaków.");
+      } else {
+        alert("Podana wartość nie jest liczbą! Spróbuj ponownie");
+      }
+     }
+  </script>
+  <script>
+    function howManyGenerated() {
 
-  var pass_length = document.getElemenetById("symbols_amount");
-  return pass_length;
-}
-</script>
+    }
+  </script>
+
+
+  <!--for #symbols_amount to clear window -->
+  <!--
 <script>
-function getWindowEmpty(){
-  document.getElemenetById("symbols_amount").style.active= value = 55;
+function getWindowEmpty(empty){
+  empty.value ="";
 }
 </script>
-<script>
-function checkBoxCheck(){
-  document.getElementById("only_letter") = var box_one;
-  document.getElementById("letter_and_numbers") = var box_two;
-  document.getElementById("all_symbols") = var box_three;
-  if(box_one == true){
-    document.getElementById("letter_and_numbers").checked == false;
-    document.getElementById("all_symbols").checked == false;
-  }
-  else if(box_two == true){
-    document.getElementById("all_symbols").checked == false;
-    document.getElementById("only_letter").checked == false;
-  }
-  else{
-    document.getElementById("letter_and_numbers").checked == false;
-    document.getElementById("only_letter").checked == false;
-  }
-}
-</script>
-<!--
+-->
+
+  <!--
 <script>
   function mOver(obj){
     obj.innerHTML = autoGeneratePass()
