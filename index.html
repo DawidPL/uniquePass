@@ -19,25 +19,29 @@ $(document).ready(function() {
 </head>
 
 <body>
+  <div id="title_wrapper">
+    <h1>Unique Pass</h1>
+  </div>
   <div class="menu">
     <nav class="fixed_menu">
       <ul>
-        <li>Strona główna</li>
-        <li>Portfolio</li>
-        <li>Contact</li>
+        <li onclick="displayPopup();">Sprawdź siłe hasła</li>
+        <li>Kontakt</li>
       </ul>
     </nav>
   </div>
   <div class="container">
-    <div class="main_wrapper">
+    <div class="main_wrapper" id="main_wrapper_function">
       <div class="grid1">
         <div>
           <div id="copyAlert">Najedź na okno</div>
           <div>
-            <input type="text" id="refresh_pass_generate" onmouseover="autoPassword(); copyToClipboardButton(); buttonAppear();">
-            <div style="display:inline-block;">
-              <input id="copyButton" type="button" onclick="copyToClipboardSecond(); copyToClipboardPopup();" style="display:none; float:right;"></input>
-            </div>
+            <input type="text" id="refresh_pass_generate" onmouseover="autoPassword(); copyToClipboardButton(); buttonAppear(); showImgAgain()">
+          </div>
+          <div style="display:inline-block; width:100%; height:100px; position:relative;">
+            <input id="copyButton" type="button" onclick="copyToClipboardSecond(); copyToClipboardPopup();" onmouseover="bounceImg()" style="display:none; float:right;"></input>
+            <img id="copyImg" src="papers.png" />
+            <img id="copyImgChecked" style="display:none; float:right; margin-right:20px;" src="checked.png" />
           </div>
           <!--<input type="checkbox" style="display:none; float:right;"id="copy_to_clipboard">-->
         </div>
@@ -53,21 +57,24 @@ $(document).ready(function() {
             <label><input type="checkbox" id="only_letter" onclick="checkBoxCheck()">tylko litery</label>
             <label><input type="checkbox" id="letter_and_numbers" onclick="checkBoxCheck()">litery i cyfry</label>
             <label><input type="checkbox" id="all_symbols" onclick="checkBoxCheck()">wszystkie znaki</label>
+            <label><input type="checkbox" id="pin" onclick="checkBoxCheck()">4-cyfrowy pin</label>
           </div>
         </div>
         <div>
           <p>podaj preferowaną długość hasła (przedział 6-50):</p>
           <div>
-            <label><input type="text" id="symbols_amount" value="ilość znaków"></label>
-            <input type="button" id="symbols_amount_button" onclick="passwordLength();" value="zatwierdź">
-            <div style="float:right;">
+            <label><input type="text" id="symbols_amount" value=""></label>
+            <input type="button" id="symbols_amount_button" onclick="passwordLength(); copyPopupDefault();" value="zatwierdź">
+            <div class="user_pass_popup"style="float:right; position:relative;">
               <input type="text" id="auto_pass_generate" value="wygeneruj hasło">
+              <img id="show_copy_button" onclick="copyToClipboardCustom()" src="copy.png" />
+              <div id="copy_popup">skopiuj</div>
             </div>
           </div>
         </div>
       </div>
       <div class="grid2">
-        <span>Liczba wygenerowanych haseł:</span><span id="how_many"></span>
+        <span>Liczba wygenerowanych haseł:</span><span id="how_many">liczba</span>
       </div>
       <div class="grid2">
         <div>
@@ -75,8 +82,16 @@ $(document).ready(function() {
         </div>
       </div>
       <div class="grid2">
-        2018
+        Made by Dawid Hrynkiewicz
       </div>
+    </div>
+  </div>
+  <div id="check_user_pass">
+    <div class="check_user_pass_page">
+      <span class="close" onclick ="closePopup()">&times;</span>
+      <h3>Sprawdz swoje hasło</h3>
+      <input type="password" id="check_pass_input" value="" >
+      <input type="button" id="check_pass_input_button" onclick="checkPassStrength();"value="sprawdź" >
     </div>
   </div>
   <script>
@@ -120,6 +135,14 @@ $(document).ready(function() {
           pass += chars.charAt(i);
         }
         return pass;
+      } else if (document.getElementById("pin").checked == true){
+        var chars = "1234567890";
+        var pass = "";
+        for (var x = 0; x < length / 4; x++) {
+          var i = Math.floor(Math.random() * chars.length);
+          pass += chars.charAt(i);
+        }
+        return pass;
       } else {
         var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
         var pass = "";
@@ -148,6 +171,8 @@ $(document).ready(function() {
     function buttonAppear() {
       document.getElementById("copyButton").style.display = "block";
       document.getElementById("copyButton").value = "skopiuj do schowka";
+      document.getElementById("copyImg").style.display = "block";
+      document.getElementById("copyImgChecked").style.display = "none";
     }
   </script>
   <script>
@@ -155,12 +180,14 @@ $(document).ready(function() {
       var copyText = document.getElementById("refresh_pass_generate");
       copyText.select();
       document.execCommand("Copy");
-
     }
   </script>
   <script>
     function copyToClipboardPopup() {
       document.getElementById("copyButton").value = "skopiowano";
+      document.getElementById("copyImgChecked").style.display = "block";
+      document.getElementById("copyImg").style.display ="none";
+      document.getElementById("copyButton").style.marginLeft="82%";
     }
   </script>
   <script>
@@ -175,54 +202,125 @@ $(document).ready(function() {
       var copyText = document.getElementById("symbols_amount");
       copyText.select();
       document.execCommand("Copy");
-      if (copyText.value % 1 === 0 && copyText.value <= 50 && copyText.value >= 6 && copyText.value !== 0) {
+      if (copyText.value % 1 === 0 && copyText.value <= 50 && copyText.value >= 6 && copyText.value !== 0
+        && document.getElementById("pin").checked == false) {
         document.getElementById("auto_pass_generate").value = getPassword(copyText.value);
         document.getElementById("auto_pass_generate").style.display = "inline";
+        document.getElementById("show_copy_button").style.display = "block";
       } else if(copyText.value % 1 === 0 && copyText.value >= 50){
         alert("Hasło może mieć maksymalnie 50 znaków, podaj mniejszą liczbę.");
       } else if(copyText.value % 1 === 0 && copyText.value <= 6){
         alert("Hasło jest za krótkie, podaj większą ilość znaków.");
-      } else {
+      } else if(document.getElementById("pin").checked == true){
+        alert("Odznacz opcje 4-cyfrowy pin aby generować hasło");
+      }else {
         alert("Podana wartość nie jest liczbą! Spróbuj ponownie");
       }
      }
   </script>
   <script>
-    function howManyGenerated() {
-
+  function copyToClipboardCustom() {
+    var copyText = document.getElementById("auto_pass_generate");
+    copyText.select();
+    document.execCommand("Copy");
+    document.getElementById('copy_popup').innerHTML = 'skopiowano!';
+  }
+  </script>
+  <script>
+  function copyPopupDefault(){
+    document.getElementById('copy_popup').innerHTML = 'skopiuj';
+  }
+  </script>
+  <script>
+  function displayPopup(){
+    document.getElementById('check_user_pass').style.display='block';
+    var span = document.getElementsByClassName("close")[0];
+  }
+  </script>
+  <script>
+  function closePopup(){
+  document.getElementById('check_user_pass').style.display="none";
+  }
+  var modal = document.getElementById('check_user_pass');
+  var cont = document.getElementById('main_wrapper_function');
+  window.onclick = function(event) {
+    if (event.target == modal || event.target == cont) {
+        modal.style.display = "none";
     }
+}
+  </script>
+  <script>
+  function checkPassStrength(){
+  var check = document.getElementById('check_pass_input_button');
+  var pass = document.getElementById('check_pass_input').value ;
+  pass = val.match(/\d+/g);
+  if (pass != null){
+    alert('jest liczba');
+  }else if{
+    alert('nie ma liczby');
+  }
+}
   </script>
 
+  <!-- efekt wyświetlania hasła - w budowie
+  <script>
+  window.onload = function () {
 
-  <!--for #symbols_amount to clear window -->
-  <!--
-<script>
-function getWindowEmpty(empty){
-  empty.value ="";
-}
-</script>
+      var blue = '#2980b9';
+      var l = Snap('#logo');
+      var p = l.select('path');
+
+      l.append(p);
+
+      p.attr({
+          fill: blue,
+          stroke: '#0066CC',
+      });
+
+      setTimeout( function() {
+          // modify this one line below, and see the result !
+          var logoTitle = 'testuje';
+          var logoRandom = '';
+          var logoTitleContainer = l.text(0, '98%', '');
+          var possible = "-+*/|}{[]~\\\":;?/.><=+-_)(*&^%$#@!)}";
+          logoTitleContainer.attr({
+              fontSize: 280,
+              fontFamily: 'Dosis',
+              fontWeight: '600'
+          });
+
+          function generateRandomTitle(i, logoRandom) {
+              setTimeout( function() {
+                  logoTitleContainer.attr({ text: logoRandom });
+              }, i*70 );
+          }
+
+          for( var i=0; i < logoTitle.length+1; i++ ) {
+              logoRandom = logoTitle.substr(0, i);
+              for( var j=i; j < logoTitle.length; j++ ) {
+                  logoRandom += possible.charAt(Math.floor(Math.random() * possible.length));
+              }
+              generateRandomTitle(i, logoRandom);
+              logoRandom = '';
+          }
+
+      }, 500 );
+
+  }
+  </script>
+  <!-- ilość wygenerowanych haseł - w budowie
+  <script>
+    function howManyGenerated() {
+      var num = 0
+      var number = document.getElementById("how_many");
+      var check = document.getElementById("refresh_pass_generate");
+      var usercheck = document.getElementById("symbols_amount_button");
+      while(check.onmouseover == true || usercheck.click == true){
+          num ++;
+          number.innerHTML = num;
+      }
+      return num;
+    }
+  </script>
 -->
-
-  <!--
-<script>
-  function mOver(obj){
-    obj.innerHTML = autoGeneratePass()
-  }
-  function mOut(obj){
-    obj.innerHTML = " "
-  }
-</script>
-<script>
-  ('#auto_pass_generate').hover(
-  function () {
-    $(this).show();
-  },
-  function () {
-    $(this).hide();
-  }
-);
-</script>
--->
-
-
 </body>
