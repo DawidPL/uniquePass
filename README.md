@@ -1,6 +1,6 @@
 # uniquePass
 
-Only outline. Not done yet.
+Almost done.
 
 This simple program will generate a password according to your preferences. All in one file, pure js. 
 Multiple choices of password strenght. Also allow user to enter type of numbers or letters he would like to have in. 
