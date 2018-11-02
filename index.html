@@ -6,16 +6,6 @@
   <link rel="stylesheet" href="style.css" type="text/css" />
   <script src="math.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <!--auto refresh jquery
-<script>
-$(document).ready(function() {
-    $("#refresh_pass_generate").load(autoPassword(););
-    var refreshId = setInterval(function() {
-        $("#refresh_pass_generate").load(autoPassword(););
-    }, 2000);
-});
-</script>
--->
 </head>
 
 <body>
@@ -74,24 +64,22 @@ $(document).ready(function() {
         </div>
       </div>
       <div class="grid2">
-        <span>Liczba wygenerowanych haseł:</span><span id="how_many">liczba</span>
-      </div>
-      <div class="grid2">
         <div>
           <div class="line"></div>
         </div>
       </div>
-      <div class="grid2">
-        Made by Dawid Hrynkiewicz
+      <div class="grid3">
+        <span>Made by </span><a href="https://dawidh.pl">Dawid Hrynkiewicz</a>
       </div>
     </div>
   </div>
   <div id="check_user_pass">
     <div class="check_user_pass_page">
       <span class="close" onclick ="closePopup()">&times;</span>
-      <h3>Sprawdz swoje hasło</h3>
+      <h3>Sprawdź swoje hasło</h3>
       <input type="password" id="check_pass_input" value="" >
       <input type="button" id="check_pass_input_button" onclick="checkPassStrength();"value="sprawdź" >
+      <span id="pass_strength_alert"style="float:right; margin-right:50px;"> test </span>
     </div>
   </div>
   <script>
@@ -253,15 +241,33 @@ $(document).ready(function() {
   function checkPassStrength(){
   var check = document.getElementById('check_pass_input_button');
   var pass = document.getElementById('check_pass_input').value ;
-  pass = val.match(/\d+/g);
-  if (pass != null){
-    alert('jest liczba');
-  }else if{
-    alert('nie ma liczby');
+  var alert = document.getElementById('pass_strength_alert');
+  if(pass.length <= 5){
+
+    alert.innerHTML = "Hasło bardzo słabe. " + " Liczba kombinacji to "
+    + passPermutation() ;
+  }else if(pass.length >= 6 && pass.length <= 9){
+    alert.innerHTML = "Hasło o średniej sile. " + " Liczba kombinacji to "
+    + passPermutation();
+  }else if(pass.length >= 10){
+    alert.innerHTML = "Hasło bardzo silne." + " Liczba kombinacji to "
+    + passPermutation();
   }
 }
   </script>
-
+  <script>
+  function passPermutation(){
+  var pass = document.getElementById('check_pass_input').value ;
+  var count = 1;
+  var test = 0;
+    while(test != pass.length){
+      test +=1;
+      count *= test;
+      count *= 65;
+    }
+    return count;
+  }
+  </script>
   <!-- efekt wyświetlania hasła - w budowie
   <script>
   window.onload = function () {
@@ -308,7 +314,8 @@ $(document).ready(function() {
 
   }
   </script>
-  <!-- ilość wygenerowanych haseł - w budowie
+
+ ilość wygenerowanych haseł - w budowie
   <script>
     function howManyGenerated() {
       var num = 0
