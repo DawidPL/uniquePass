@@ -69,6 +69,7 @@ h1::after{
 }
 h2{
   margin-top:150px;
+  font-weight:300;
 }
 p{
   margin-left:1%;
@@ -182,7 +183,7 @@ p{
   border-bottom:1px solid #4884db;
   color: #525963;
   width:150px;
-  height:40px;
+  height:35px;
   text-align:center;
   border-radius: 3px;
 }
@@ -306,16 +307,60 @@ h3{
   padding-top:20px;
 }
 
+/* For mobile */
 
-@media (max-width:1492px){
-  .user_pass_popup{
-    padding-top:20px;
+@media (max-width:645px){
+  .additional_option label{
+    display:block;
     padding-bottom:10px;
-    margin:50px auto 0 auto;
-
+    width:100%;
   }
-  #copyImg{
+  #check_pass_input_button{
+    margin-top:10px;
+  }
+  #auto_pass_generate{
+    box-sizing: border-box;
+    
+    font-size:14px;
+  }
+  #copy_popup{
+    right:-35px;
+    bottom:20px;
+  }
+}
+@media (max-width:1045px){
+  .user_pass_popup{
+    float:none !important; 
+    margin:10px auto 0 auto;
+  }
+  #show_copy_button{
     display:none;
+    margin:0;
+    padding-left:10px;
+    height:15%;
+  }
+  #auto_pass_generate{
+    width:100%;
+  }
+  #copy_popup{
+    right:-45px;
+    bottom:40px;
+  }
+}
+
+@media (min-width:1046px){
+  #show_copy_button{
+    display:none;
+    margin:0;
+    padding-left:10px;
+    height:15%;
+  }
+  #auto_pass_generate{
+    width:100%;
+  }
+  .user_pass_popup{
+    float:none !important; 
+    margin:10px auto 0 auto;
   }
 }
 @media (max-width:1350px){
@@ -332,24 +377,12 @@ h3{
     left:15%;
   }
 }
-@media (max-width:1045px){
+@media (max-width:1492px){
   .user_pass_popup{
-    float:none !important; 
-    margin:0 auto;
+    margin:50px auto 0 auto;
+  }
+  #copyImg{
+    display:none;
   }
 }
-@media (max-width:645px){
-  .additional_option label{
-    display:block;
-    padding-bottom:10px;
-    width:100%;
-  }
-  #check_pass_input_button{
-    margin-top:10px;
-  }
-  #auto_pass_generate{
-    box-sizing: border-box;
-    width:auto;
-    font-size:14px;
-  }
-}
+
