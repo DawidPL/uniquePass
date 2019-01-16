@@ -1,15 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Josefin+Slab|Poiret+One|Pontano+Sans|Jura');
 
-@media screen (max-width:1430px){
-  .user_pass_popup{
-    padding-top:20px;
-    padding-bottom:10px;
-  }
-  #copyImg{
-    display:none;
-  }
-}
-
 body{
   margin:0 auto;
   font-family: 'Pontano Sans', sans-serif;
@@ -34,16 +24,25 @@ body{
   width: 80%;
 }
 .main_wrapper{
-  display:grid;
-  grid-template-columns: auto;
+  display:flex;
+  justify-content: space-around;
+  flex-wrap:wrap;
 }
 .grid1{
   text-align:center;
+  width:90%;
+}
+.grid2{
+  width:90%;
 }
 .grid3{
+  width:90%;
   text-align:right;
   padding-top:10px;
+}
+.grid4{
 
+  width:90%;
 }
 .line{
   padding-top:10px;
@@ -141,10 +140,7 @@ p{
    color: #FFF;
  }
 #copyButton{
-  position:absolute;
-  display:inline-block;
-  margin-left:82%;
-  padding-top:5px;
+  margin:30px auto;
   padding-bottom:5px;
   border-radius:3px;
   border:none;
@@ -163,7 +159,7 @@ p{
 }
 #copyImg{
   display:none;
-  float:right;
+  
   animation: shimmy 2s infinite;
   animation-direction: alternate;
 }
@@ -229,6 +225,8 @@ p{
  visibility: hidden;
  -webkit-transition: visibility 0s, opacity 0.5s linear;
  transition: visibility 0s, opacity 0.5s linear;
+}
+.user_pass_popup{
 }
 .user_pass_popup:hover #copy_popup{
  width: 50px;
@@ -301,4 +299,51 @@ h3{
 }
 #check_pass_input_button:hover{
   background-color: #fd8d43;
+}
+#pass_strength_alert{
+  display:block;
+  margin:0 auto;
+  padding-top:20px;
+}
+
+
+@media (max-width:1492px){
+  .user_pass_popup{
+    padding-top:20px;
+    padding-bottom:10px;
+    margin:50px auto 0 auto;
+
+  }
+  #copyImg{
+    display:none;
+  }
+}
+@media (max-width:1350px){
+  #copyButton{
+    text-align:center;
+    margin:0 auto;
+  }
+  .check_user_pass_page{
+    padding:20px 20px 50px 20px;
+    text-align:center;
+  }
+  #check_user_pass{
+    width:70%;
+    left:15%;
+  }
+}
+@media (max-width:1045px){
+  .user_pass_popup{
+    float:none; 
+  }
+}
+@media (max-width:645px){
+  .additional_option label{
+    display:block;
+    padding-bottom:10px;
+    width:100%;
+  }
+  #check_pass_input_button{
+    margin-top:10px;
+  }
 }
