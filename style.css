@@ -334,7 +334,8 @@ h3{
 }
 @media (max-width:1045px){
   .user_pass_popup{
-    float:none; 
+    float:none !important; 
+    margin:0 auto;
   }
 }
 @media (max-width:645px){
@@ -345,5 +346,10 @@ h3{
   }
   #check_pass_input_button{
     margin-top:10px;
+  }
+  #auto_pass_generate{
+    box-sizing: border-box;
+    width:auto;
+    font-size:14px;
   }
 }
