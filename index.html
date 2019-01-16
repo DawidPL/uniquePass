@@ -6,16 +6,6 @@
   <link rel="stylesheet" href="style.css" type="text/css" />
   <script src="math.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <!--auto refresh jquery
-<script>
-$(document).ready(function() {
-    $("#refresh_pass_generate").load(autoPassword(););
-    var refreshId = setInterval(function() {
-        $("#refresh_pass_generate").load(autoPassword(););
-    }, 2000);
-});
-</script>
--->
 </head>
 
 <body>
@@ -65,9 +55,11 @@ $(document).ready(function() {
             <label><input type="text" id="symbols_amount" value=""></label>
             <input type="button" id="symbols_amount_button" onclick="passwordLength(); copyPopupDefault();" value="zatwierdź">
             <div class="user_pass_popup"style="float:right; position:relative;">
+              <div>
               <input type="text" id="auto_pass_generate" value="wygeneruj hasło">
               <img id="show_copy_button" onclick="copyToClipboardCustom()" src="copy.png" />
               <div id="copy_popup">skopiuj</div>
+              </div>
             </div>
           </div>
         </div>
@@ -274,7 +266,7 @@ $(document).ready(function() {
     return count;
   }
   </script>
-  <!-- efekt wyświetlania hasła - w budowie
+  <!-- pass display effect 
   <script>
   window.onload = function () {
 
@@ -321,7 +313,7 @@ $(document).ready(function() {
   }
   </script>
 
- ilość wygenerowanych haseł - w budowie
+ number of pass generated
   <script>
     function howManyGenerated() {
       var num = 0
