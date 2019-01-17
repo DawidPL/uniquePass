@@ -1,0 +1,19 @@
+$width-full: 100%;
+$width-px: 100px;
+$height-px: 100px;
+
+@mixin flex(){
+    display:flex;
+    justify-content: space-around;
+    flex-wrap:wrap;
+}
+
+
+$main-margin: 0 auto;
+$margin-base-px:100px;
+$margin-base-pc:100%;
+
+$padding: 10px;
+
+$position-px:100px;
+$position-pc:100%;

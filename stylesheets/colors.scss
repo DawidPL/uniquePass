@@ -1,0 +1,22 @@
+$background-color:#303030;
+$border-color:#fd7e29;
+$title-color:linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+$color-generator:#525963;
+$color-border: #d2d2d2;
+$shadow: 0px 14px 44px -7px rgba(254,202,168,0.42);
+$shadow-copy-button:0px 14px 44px -7px rgba(254,202,168,1);
+
+@mixin box-shadow($shadow){
+    @if $shadow{
+        -webkit-box-shadow: $shadow;
+        -moz-box-shadow: $shadow;
+        -ms-box-shadow:$shadow;
+        box-shadow: $shadow;
+    } @else{
+        -webkit-box-shadow: $shadow-copy-button;
+        -moz-box-shadow: $shadow-copy-button;
+        -ms-box-shadow:$shadow-copy-button;
+        box-shadow: $shadow-copy-button;
+    }
+
+}

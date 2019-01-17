@@ -1,0 +1,13 @@
+@mixin no-href(){
+    text-decoration-style:none;
+}
+@mixin cursor(){
+    cursor:pointer;
+}
+@mixin radius(){
+    border-radius:3px;
+}
+@mixin transition(){
+    -webkit-transition: visibility 0s, opacity 0.5s linear;
+    transition: visibility 0s, opacity 0.5s linear;
+}

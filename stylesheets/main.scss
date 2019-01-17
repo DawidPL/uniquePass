@@ -1,0 +1,356 @@
+@import "grid", "colors", "font", "decorators";
+
+/* Main page elements */
+
+body{
+    margin:$main-margin;
+    font-family: $font-main;
+    background-color:$background-color;
+}
+#title_wrapper{
+    width:$width-full;
+    height:100px;
+    text-align: center;
+    border-bottom:5px solid $border-color;
+    background-image: $title-color;
+}
+.menu{
+    display:block;
+    text-align: left;
+}
+.container{
+    margin:$main-margin;
+    width:$width-full - 20;
+}
+.main_wrapper{
+    @include flex;
+}
+.grid1, .grid2, .grid3, .grid4{
+    width:$width-full - 10;
+}
+.grid1{
+    text-align:center;
+}
+.grid3{
+    text-align: right;
+    padding-top:$padding;
+}
+.line{
+    padding:$padding;
+    border-bottom:1px solid $border-color;
+}
+h1,h2,p,a{
+    font-family:$font-text;
+    color:#FFF;
+    text-decoration:none;
+}
+h1{
+    margin:$main-margin;
+    padding-top:$padding + 5;
+    text-transform:uppercase;
+    &:after{
+        content:url(../img/password_logo_white.png);
+        margin-left:$margin-base-px - 85;
+    }
+}
+h2{
+    margin-top:$margin-base-px + 50;
+    font-weight:300;
+}
+p{
+    margin-left:$margin-base-pc - 99;
+}
+span{
+    color: #29A8FD;
+}
+
+/* Classes and IDs */
+
+#auto_pass_generate{
+    display:none;
+    width:$width-px + 600;
+    height:$height-px - 70;
+    padding:$padding $padding + 10;
+    margin:$main-margin;
+    text-align:center;
+    font-size:$font-size - 2;
+    color:$color-generator;
+    line-height: normal;
+    border:none;
+    cursor:pointer;
+}
+#symbols_amount_button{
+    padding: $padding;
+    background-color: #FFF;
+    color:$color-generator;
+    border:1px solid $color-border;
+
+    &:hover{
+        border:1px solid #5d98f7;
+    }
+}
+
+/* Menu */
+
+.fixed_menu{
+    ul{
+        li{
+            display:inline;
+            padding:$padding $padding $padding - 8;
+            @include no-href;
+            color:#FFF;
+            border-bottom:1px solid $color-border;
+            &:hover{
+                @include cursor;
+                color:#29A8FD;
+            }
+        }
+    }
+}
+#refresh_pass_generate{
+    position:relative;
+    width:$width-px + 200;
+    height:$height-px - 50;
+    margin:$margin-base-px - 80 0 $margin-base-px - 90;
+    font-family:$font-main;
+    font-size:$font-size + 2;
+    text-align:center;
+    border:none;
+    color:#FFF;
+    @include radius;
+    background-color:$border-color;
+    @include box-shadow($shadow);
+    &:hover{
+        @include cursor;
+        color: #e5cfd9;
+    }
+}
+#copyAlert{
+    margin-top:$margin-base-px - 40;
+    margin-bottom:$margin-base-px - 60;
+    font-size:$font-size + 2;
+    font-family:$font-text;
+    color:#FFF;
+}
+#copyButton{
+    margin:$margin-base-px - 70 auto;
+    padding-bottom:$padding - 5;
+    font-family:$font-text;
+    font-size:$font-size - 2;
+    color:#FFF;
+    @include radius;
+    background-color:$border-color;
+    border:none;
+    box-shadow:none;
+    &:hover{
+        color:#FFF;
+        background-color:$border-color;
+        @include box-shadow($shadow);
+    }
+}
+.additional_option{
+    margin:$margin-base-px - 90 $margin-base-px - 95;
+    color:#FFF;
+}
+#symbols_amount{
+    margin-left:$margin-base-pc - 93;
+    margin-right:$margin-base-pc - 99;
+    width:$width-px + 50;
+    height:$height-px - 65;
+    text-align:center;
+    border:none;
+    @include radius;
+    color:$color-generator;
+    border-bottom:1px solid #4884db;
+    &:hover{
+        cursor: url('../img/pencil.png'), auto;
+    }
+}
+#symbols_amount_button{
+    background-color:$border-color;
+    border:none;
+    color:#FFF;
+    @include radius;
+    font-family:$font-text;
+    &:hover{
+        border:none;
+        color:#e5cfd9;
+    }
+}
+#show_copy_button{
+    display:none;
+    position:relative;
+    margin-left:$margin-base-pc - 4;
+    margin-top:$margin-base-pc - 105.5;
+    z-index:999;
+    &:hover{
+        @include box-shadow($shadow-copy-button)
+    }
+}
+#copy_popup{
+    position: absolute;
+    bottom: 20px;
+    right: -80px;
+    background: transparent;
+    color: #FFF;
+    margin-bottom: $margin-base-px - 95;
+    opacity: 0;
+    visibility: hidden;
+    @include transition;
+   }
+.user_pass_popup:hover #copy_popup{
+    width: $width-px - 50;
+    padding: $padding - 2 $padding + 5;
+    visibility: visible;
+    opacity: 0.7;
+}
+
+/* Password strenght  */
+
+h3{
+    font-family:$font-text;
+    color:#FFF;
+}
+#check_user_pass{
+    display:none;
+    position: fixed;
+    margin:$main-margin;
+    z-index:1;
+    top:$margin-base-pc - 80;
+    left:$margin-base-pc - 75;
+    width:$width-full - 50;
+    height:auto;
+    background-color: #444444;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+  @keyframes animatetop {
+      from {top: -500px; opacity: 0}
+      to {top: 20%; opacity: 1}
+  }
+.check_user_pass_page{
+    margin: $margin-base-pc - 85 auto;
+    padding: $padding * 2;
+    width: $width-full - 20;
+    background-color: #595959;
+    &:before{
+        content: url('../img/network.png');
+  opacity: 0.5;
+    }
+  }
+.close{
+    color:#aaa;
+    float:right;
+    font-size:$font-size + 8;
+    font-weight: bold;
+    &:hover, &:focus{
+        color:#000000;
+        text-decoration:none;
+        @include cursor;
+    }
+}
+#check_pass_input{
+    width:$width-px + 100;
+    height:$height-px - 70;
+    border:none;
+    border-bottom:1px solid #4884db;
+    color:$color-generator;
+    text-align:center;
+    @include radius;
+}
+#check_pass_input_button{
+    padding:$padding - 6 $padding - 5 $padding - 4;
+    background-color:$border-color;
+    font-size:$font-size - 5;
+    font-family:$font-text;
+    color: #FFF;
+    @include radius;
+    border:none;
+    box-shadow:none;
+    &:hover{
+        background-color:$border-color;
+    }
+  }
+  #pass_strength_alert{
+    display:block;
+    margin:$main-margin;
+    padding-top:$padding + 10;
+  }
+
+
+/* Mobile devices */
+
+@media (max-width:645px){
+    .additional_option label{
+      display:block;
+      padding-bottom:$padding;
+      width: $width-full;
+    }
+    #check_pass_input_button{
+      margin-top:$margin-base-px - 90;
+    }
+    #auto_pass_generate{
+      box-sizing: border-box;
+      font-size:$font-size - 6;
+    }
+    #copy_popup{
+      right:$position-px - 135;
+      bottom:$position-px - 80;
+    }
+}
+@media (max-width:1045px){
+    .user_pass_popup{
+      float:none !important; 
+      margin:$margin-base-px - 90 auto 0;
+    }
+    #show_copy_button{
+      display:none;
+      margin:0;
+      padding-left:$padding;
+      height:$position-pc - 85;
+    }
+    #auto_pass_generate{
+      width:$width-full;
+    }
+    #copy_popup{
+      right:$position-px - 55;
+      bottom:$position-px - 60;
+    }
+}
+@media (min-width:1046px){
+    #show_copy_button{
+      display:none;
+      margin:0;
+      padding-left:$padding;
+      height:$position-pc - 85%;
+    }
+    #auto_pass_generate{
+      width:$width-full;
+    }
+    .user_pass_popup{
+      float:none !important; 
+      margin:$margin-base-px - 90 auto 0;
+    }
+  }
+@media (max-width:1350px){
+  #copyButton{
+    text-align:center;
+    margin:$main-margin;
+  }
+  .check_user_pass_page{
+    padding:$padding + 10 $padding + 10 50px;
+    text-align:center;
+  }
+  #check_user_pass{
+    width:$width-full - 30;
+    left:$position-pc - 85;
+  }
+}
+@media (max-width:1492px){
+  .user_pass_popup{
+    margin:$margin-base-px - 50 auto 0;
+  }
+  #copyImg{
+    display:none;
+  }
+}
