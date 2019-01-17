@@ -31,10 +31,8 @@
             <input id="copyButton" type="button" onclick="copyToClipboardSecond(); copyToClipboardPopup();" onmouseover="bounceImg()" style="display:none;"></input>
             <img id="copyImgChecked" style="display:none;" src="img/checked.png" />
           </div>
-          <!--<input type="checkbox" style="display:none; float:right;"id="copy_to_clipboard">-->
         </div>
         <form>
-          <!--<input type="button" id="auto_pass_generate_button" onclick="autoGeneratePass()" value="generuj">-->
           <input type="button" style="display:none;" id="copy_to_clipboard" onclick="copyToClipboard()" value="skopiuj do schowka">
         </form>
       </div>
@@ -265,66 +263,4 @@
     return count;
   }
   </script>
-  <!-- pass display effect 
-  <script>
-  window.onload = function () {
-
-      var blue = '#2980b9';
-      var l = Snap('#logo');
-      var p = l.select('path');
-
-      l.append(p);
-
-      p.attr({
-          fill: blue,
-          stroke: '#0066CC',
-      });
-
-      setTimeout( function() {
-          // modify this one line below, and see the result !
-          var logoTitle = 'testuje';
-          var logoRandom = '';
-          var logoTitleContainer = l.text(0, '98%', '');
-          var possible = "-+*/|}{[]~\\\":;?/.><=+-_)(*&^%$#@!)}";
-          logoTitleContainer.attr({
-              fontSize: 280,
-              fontFamily: 'Dosis',
-              fontWeight: '600'
-          });
-
-          function generateRandomTitle(i, logoRandom) {
-              setTimeout( function() {
-                  logoTitleContainer.attr({ text: logoRandom });
-              }, i*70 );
-          }
-
-          for( var i=0; i < logoTitle.length+1; i++ ) {
-              logoRandom = logoTitle.substr(0, i);
-              for( var j=i; j < logoTitle.length; j++ ) {
-                  logoRandom += possible.charAt(Math.floor(Math.random() * possible.length));
-              }
-              generateRandomTitle(i, logoRandom);
-              logoRandom = '';
-          }
-
-      }, 500 );
-
-  }
-  </script>
-
- number of pass generated
-  <script>
-    function howManyGenerated() {
-      var num = 0
-      var number = document.getElementById("how_many");
-      var check = document.getElementById("refresh_pass_generate");
-      var usercheck = document.getElementById("symbols_amount_button");
-      while(check.onmouseover == true || usercheck.click == true){
-          num ++;
-          number.innerHTML = num;
-      }
-      return num;
-    }
-  </script>
--->
 </body>
