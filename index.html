@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="stylesheets/main.css" type="text/css" />
+  <script src="math.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+  <div id="title_wrapper">
+    <h1>Unique Pass</h1>
+  </div>
+  <div class="menu">
+    <nav class="fixed_menu">
+      <ul>
+        <li onclick="displayPopup();">Sprawdź siłe hasła</li>
+        <li>Kontakt</li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container">
+    <div class="main_wrapper" id="main_wrapper_function">
+      <div class="grid1">
+        <div>
+          <div id="copyAlert">Najedź na okno</div>
+          <div>
+            <input type="text" id="refresh_pass_generate" onmouseover="autoPassword(); copyToClipboardButton(); buttonAppear(); showImgAgain()">
+          </div>
+          <div style="display:inline-block; width:100%; height:100px; position:relative;">
+            <input id="copyButton" type="button" onclick="copyToClipboardSecond(); copyToClipboardPopup();" onmouseover="bounceImg()" style="display:none;"></input>
+            <img id="copyImgChecked" style="display:none;" src="img/checked.png" />
+          </div>
+          <!--<input type="checkbox" style="display:none; float:right;"id="copy_to_clipboard">-->
+        </div>
+        <form>
+          <!--<input type="button" id="auto_pass_generate_button" onclick="autoGeneratePass()" value="generuj">-->
+          <input type="button" style="display:none;" id="copy_to_clipboard" onclick="copyToClipboard()" value="skopiuj do schowka">
+        </form>
+      </div>
+      <div class="grid4">
+        <h2>Dodatkowe opcje</h2>
+        <div class="additional_option">
+          <div class="additional_option">
+            <label><input type="checkbox" id="only_letter" onclick="checkBoxCheck()">tylko litery</label>
+            <label><input type="checkbox" id="letter_and_numbers" onclick="checkBoxCheck()">litery i cyfry</label>
+            <label><input type="checkbox" id="all_symbols" onclick="checkBoxCheck()">wszystkie znaki</label>
+            <label><input type="checkbox" id="pin" onclick="checkBoxCheck()">4-cyfrowy pin</label>
+          </div>
+        </div>
+        <div>
+          <p>podaj preferowaną długość hasła (przedział 6-50):</p>
+          <div>
+            <label><input type="text" id="symbols_amount" value=""></label>
+            <input type="button" id="symbols_amount_button" onclick="passwordLength(); copyPopupDefault();" value="zatwierdź">
+            <div class="user_pass_popup"style="float:right; position:relative;">
+              <div style="display:flex;">
+              <input type="text" id="auto_pass_generate" value="wygeneruj hasło">
+              <img id="show_copy_button" onclick="copyToClipboardCustom()" src="img/copy.png" />
+              <div id="copy_popup">skopiuj</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid2">
+        <div>
+          <div class="line"></div>
+        </div>
+      </div>
+      <div class="grid3">
+        <span>Made by </span><a href="https://dawidh.pl">Dawid H</a>
+      </div>
+    </div>
+  </div>
+  <div id="check_user_pass">
+    <div class="check_user_pass_page">
+      <span class="close" onclick ="closePopup()">&times;</span>
+      <h3>Sprawdź swoje hasło</h3>
+      <input type="password" id="check_pass_input" value="" >
+      <input type="button" id="check_pass_input_button" onclick="checkPassStrength();"value="sprawdź" >
+      <span id="pass_strength_alert"> </span>
+    </div>
+  </div>
+  <script>
+    function autoPassword() {
+      document.getElementById("refresh_pass_generate").value = getPassword(15);
+    }
+  </script>
+  <script>
+    function userPassword() {
+      var data = document.getElementById("user_value");
+      document.getElementById("user_value_button").disabled = false;
+      while (data == null) {
+        document.getElementById("user_value_button").disabled = true;
+      }
+      return data;
+    }
+  </script>
+  <script>
+    function getPassword(length) {
+      if (document.getElementById("all_symbols").checked == true) {
+        var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+        var pass = "";
+        for (var x = 0; x < length; x++) {
+          var i = Math.floor(Math.random() * chars.length);
+          pass += chars.charAt(i);
+        }
+        return pass;
+      } else if (document.getElementById("letter_and_numbers").checked == true) {
+        var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP1234567890";
+        var pass = "";
+        for (var x = 0; x < length; x++) {
+          var i = Math.floor(Math.random() * chars.length);
+          pass += chars.charAt(i);
+        }
+        return pass;
+      } else if (document.getElementById("only_letter").checked == true) {
+        var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOP";
+        var pass = "";
+        for (var x = 0; x < length; x++) {
+          var i = Math.floor(Math.random() * chars.length);
+          pass += chars.charAt(i);
+        }
+        return pass;
+      } else if (document.getElementById("pin").checked == true){
+        var chars = "1234567890";
+        var pass = "";
+        for (var x = 0; x < length / 4; x++) {
+          var i = Math.floor(Math.random() * chars.length);
+          pass += chars.charAt(i);
+        }
+        return pass;
+      } else {
+        var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+        var pass = "";
+        for (var x = 0; x < length; x++) {
+          var i = Math.floor(Math.random() * chars.length);
+          pass += chars.charAt(i);
+        }
+        return pass;
+      }
+    }
+  </script>
+  <script>
+    function autoGeneratePass() {
+      document.getElementById("auto_pass_generate").value = getPassword();
+    }
+  </script>
+  <script>
+    function copyToClipboard() {
+      var copyText = document.getElementById("auto_pass_generate");
+      copyText.select();
+      document.execCommand("Copy");
+      alert("skopiowano");
+    }
+  </script>
+  <script>
+    function buttonAppear() {
+      document.getElementById("copyButton").style.display = "block";
+      document.getElementById("copyButton").value = "skopiuj do schowka";
+      document.getElementById("copyImgChecked").style.display = "none";
+    }
+  </script>
+  <script>
+    function copyToClipboardSecond() {
+      var copyText = document.getElementById("refresh_pass_generate");
+      copyText.select();
+      document.execCommand("Copy");
+    }
+  </script>
+  <script>
+    function copyToClipboardPopup() {
+      document.getElementById("copyButton").value = "skopiowano";
+      document.getElementById("copyImgChecked").style.display = "inline";
+    }
+  </script>
+  <script>
+    function copyToClipboardButton() {
+      document.getElementById("copyAlert").innerHTML = "Hasło zostało wygenerowane. " +
+        "Najedź ponownie aby utworzyć kolejne. ";
+      document.getElementById("copy_to_clipboard").checked = true;
+    }
+  </script>
+  <script>
+    function passwordLength() {
+      var copyText = document.getElementById("symbols_amount");
+      copyText.select();
+      document.execCommand("Copy");
+      if (copyText.value % 1 === 0 && copyText.value <= 50 && copyText.value >= 6 && copyText.value !== 0
+        && document.getElementById("pin").checked == false) {
+        document.getElementById("auto_pass_generate").value = getPassword(copyText.value);
+        document.getElementById("auto_pass_generate").style.display = "inline";
+        document.getElementById("show_copy_button").style.display = "block";
+      } else if(copyText.value % 1 === 0 && copyText.value >= 50){
+        alert("Hasło może mieć maksymalnie 50 znaków, podaj mniejszą liczbę.");
+      } else if(copyText.value % 1 === 0 && copyText.value <= 6){
+        alert("Hasło jest za krótkie, podaj większą ilość znaków.");
+      } else if(document.getElementById("pin").checked == true){
+        alert("Odznacz opcje 4-cyfrowy pin aby generować hasło");
+      }else {
+        alert("Podana wartość nie jest liczbą! Spróbuj ponownie");
+      }
+     }
+  </script>
+  <script>
+  function copyToClipboardCustom() {
+    var copyText = document.getElementById("auto_pass_generate");
+    copyText.select();
+    document.execCommand("Copy");
+    document.getElementById('copy_popup').innerHTML = 'skopiowano!';
+  }
+  </script>
+  <script>
+  function copyPopupDefault(){
+    document.getElementById('copy_popup').innerHTML = 'skopiuj';
+  }
+  </script>
+  <script>
+  function displayPopup(){
+    document.getElementById('check_user_pass').style.display='block';
+    var span = document.getElementsByClassName("close")[0];
+  }
+  </script>
+  <script>
+  function closePopup(){
+  document.getElementById('check_user_pass').style.display="none";
+  }
+  var modal = document.getElementById('check_user_pass');
+  var cont = document.getElementById('main_wrapper_function');
+  window.onclick = function(event) {
+    if (event.target == modal || event.target == cont) {
+        modal.style.display = "none";
+    }
+}
+  </script>
+  <script>
+  function checkPassStrength(){
+  var check = document.getElementById('check_pass_input_button');
+  var pass = document.getElementById('check_pass_input').value ;
+  var alert = document.getElementById('pass_strength_alert');
+  if(pass.length <= 5){
+
+    alert.innerHTML = "Hasło bardzo słabe. " + " Liczba kombinacji to "
+    + passPermutation() ;
+  }else if(pass.length >= 6 && pass.length <= 9){
+    alert.innerHTML = "Hasło o średniej sile. " + " Liczba kombinacji to "
+    + passPermutation();
+  }else if(pass.length >= 10){
+    alert.innerHTML = "Hasło bardzo silne." + " Liczba kombinacji to "
+    + passPermutation();
+  }
+}
+  </script>
+  <script>
+  function passPermutation(){
+  var pass = document.getElementById('check_pass_input').value ;
+  var count = 1;
+  var test = 0;
+    while(test != pass.length){
+      test +=1;
+      count *= test;
+      count *= 65;
+    }
+    return count;
+  }
+  </script>
+  <!-- pass display effect 
+  <script>
+  window.onload = function () {
+
+      var blue = '#2980b9';
+      var l = Snap('#logo');
+      var p = l.select('path');
+
+      l.append(p);
+
+      p.attr({
+          fill: blue,
+          stroke: '#0066CC',
+      });
+
+      setTimeout( function() {
+          // modify this one line below, and see the result !
+          var logoTitle = 'testuje';
+          var logoRandom = '';
+          var logoTitleContainer = l.text(0, '98%', '');
+          var possible = "-+*/|}{[]~\\\":;?/.><=+-_)(*&^%$#@!)}";
+          logoTitleContainer.attr({
+              fontSize: 280,
+              fontFamily: 'Dosis',
+              fontWeight: '600'
+          });
+
+          function generateRandomTitle(i, logoRandom) {
+              setTimeout( function() {
+                  logoTitleContainer.attr({ text: logoRandom });
+              }, i*70 );
+          }
+
+          for( var i=0; i < logoTitle.length+1; i++ ) {
+              logoRandom = logoTitle.substr(0, i);
+              for( var j=i; j < logoTitle.length; j++ ) {
+                  logoRandom += possible.charAt(Math.floor(Math.random() * possible.length));
+              }
+              generateRandomTitle(i, logoRandom);
+              logoRandom = '';
+          }
+
+      }, 500 );
+
+  }
+  </script>
+
+ number of pass generated
+  <script>
+    function howManyGenerated() {
+      var num = 0
+      var number = document.getElementById("how_many");
+      var check = document.getElementById("refresh_pass_generate");
+      var usercheck = document.getElementById("symbols_amount_button");
+      while(check.onmouseover == true || usercheck.click == true){
+          num ++;
+          number.innerHTML = num;
+      }
+      return num;
+    }
+  </script>
+-->
+</body>
