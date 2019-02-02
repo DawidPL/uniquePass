@@ -1,5 +1,8 @@
 # uniquePass
 
+Available at http://twojehaslo.pl/
+
+
 This simple program allow to generate a password according to your preferences. All in one file, pure js. 
 If you want to try just download all files and open index.html in your browser.
 Multiple choices of password strenght. Also allow user to enter type of numbers or letters he would like to have in. 
