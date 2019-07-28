@@ -15,7 +15,7 @@
  - HTML5
  - CSS3
  - SASS
- - JavaScript
+ - pure JavaScript
 
 ### What I plan to add in the near future:
 - registration system with the ability to store passwords in the database
